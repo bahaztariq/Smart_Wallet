@@ -1,0 +1,10 @@
+{
+    "autoload":{
+        "ps4":{
+            "App\\" : "/"
+        }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^7.0"
+    }
+}
