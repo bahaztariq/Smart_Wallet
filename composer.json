@@ -6,6 +6,7 @@
     },
     "require": {
         "phpmailer/phpmailer": "^7.0",
-        "m1/env": "^2.2"
+        "m1/env": "^2.2",
+        "phroute/phroute": "^2.2"
     }
 }
