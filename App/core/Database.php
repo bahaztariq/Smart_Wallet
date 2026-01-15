@@ -1,8 +1,13 @@
 <?php 
 
+namespace App\DataBase;
+use Pdo;
+use PDOException;
+use Exception;
+
 class Database{
     private static $instance ;
-    private $pdo;
+    private pdo $pdo;
 
 
     private function __construct($dsn, $username, $password) {
