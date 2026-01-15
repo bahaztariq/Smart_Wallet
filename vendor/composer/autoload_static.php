@@ -16,6 +16,10 @@ class ComposerStaticInita26dc13fed7130896a0061ad27436565
         array (
             'M1\\Env\\' => 7,
         ),
+        'A' =>
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -30,6 +34,10 @@ class ComposerStaticInita26dc13fed7130896a0061ad27436565
         'M1\\Env\\' =>
         array (
             0 => __DIR__ . '/..' . '/m1/env/src',
+        ),
+        'App\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/App',
         ),
     );
 

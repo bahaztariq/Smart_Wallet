@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Phroute\Phroute\Route;
 
 class Router{
     
