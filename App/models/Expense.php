@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-class Income
+class Expense
 {
     private ?int $id;
     private int $userId;
     private float $amount;
     private string $description;
     private string $date;
-    private ?string $category; 
+    private string $category;
 
-    public function __construct(?int $id, int $userId, float $amount, string $description, string $date, ?string $category = null)
+    public function __construct(?int $id, int $userId, float $amount, string $description, string $date, string $category)
     {
         $this->id = $id;
         $this->userId = $userId;
@@ -46,7 +46,7 @@ class Income
         return $this->date;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): string
     {
         return $this->category;
     }
@@ -76,7 +76,7 @@ class Income
         $this->date = $date;
     }
 
-    public function setCategory(?string $category): void
+    public function setCategory(string $category): void
     {
         $this->category = $category;
     }

@@ -1,51 +1,47 @@
 <?php
 
+namespace App\Models;
 
+class Category
+{
+    private ?int $id;
+    private string $name;
+    private float $limit;
 
-
-class Category{
-    private $category;
-    private $categoryLimit;
-    private $connect;
-
-    public function __construct($connect){
-        $this->connect =$connect;
+    public function __construct(?int $id, string $name, float $limit)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->limit = $limit;
     }
 
-    public function create($category,$categoryLimit){
-        $this->category = $category;
-        $this->categoryLimit = $categoryLimit;
-        $sql = "INSERT INTO categories (category,Limit) VALUES (':category',':categoryLimit')";
-        $this->connect->prepare($sql);
-        $this->connect->execute([
-            'category' => $this->category,
-            'categoryLimit' => $this->categoryLimit
-        ]);
-        return true;
-    }
-    public function getAll(){
-        $sql = "SELECT * FROM categories";
-        $result = $this->connect->query($sql);
-        return $result;
-    }
-    public function getById($id){
-        $sql = "select * from categories where id = '$id'";
-        $result = $this->connect->query($sql);
-        return $result;
-    }
-    public function getByName($category){
-        $sql = "select * from categories where category = '$category'";
-        $result = $this->connect->query($sql);
-        return $result;
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
-    public function update($id,$category,$Limit){
-        $sql = "UPDATE categories SET category = '$category',Limit = '$Limit' WHERE id = '$id'";
-        $this->connect->query($sql);
-        
+    public function getName(): string
+    {
+        return $this->name;
     }
-    public function delete($id){
-        $sql = "DELETE FROM categories WHERE id = '$id'";
-        $this->connect->query($sql);
+
+    public function getLimit(): float
+    {
+        return $this->limit;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setLimit(float $limit): void
+    {
+        $this->limit = $limit;
     }
 }
