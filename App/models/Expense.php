@@ -9,16 +9,16 @@ class Expense
     private float $amount;
     private string $description;
     private string $date;
-    private string $category;
+    private ?int $categoryId;
 
-    public function __construct(?int $id, int $userId, float $amount, string $description, string $date, string $category)
+    public function __construct(?int $id, int $userId, float $amount, string $description, string $date, ?int $categoryId = null)
     {
         $this->id = $id;
         $this->userId = $userId;
         $this->amount = $amount;
         $this->description = $description;
         $this->date = $date;
-        $this->category = $category;
+        $this->categoryId = $categoryId;
     }
 
     public function getId(): ?int
@@ -46,9 +46,9 @@ class Expense
         return $this->date;
     }
 
-    public function getCategory(): string
+    public function getCategory(): ?int
     {
-        return $this->category;
+        return $this->categoryId;
     }
 
     public function setId(int $id): void
@@ -76,8 +76,8 @@ class Expense
         $this->date = $date;
     }
 
-    public function setCategory(string $category): void
+    public function setCategory(?int $categoryId): void
     {
-        $this->category = $category;
+        $this->categoryId = $categoryId;
     }
 }
