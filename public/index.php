@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-
-
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once 'Router.php';
 
+use App\Controllers\AuthController;
+use App\Controllers\DashboardController;
+use App\Controllers\IncomeController;
+use App\Controllers\ExpenseController;
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $scriptName = dirname($_SERVER['SCRIPT_NAME']);
@@ -16,62 +19,67 @@ if ($uri === false || $uri === '') {
     $uri = '/';
 }
 
-
 $router = new Router;
-
 $viewsPath = __DIR__ . '/../App/views';
 
 $router->add("/", function () use ($viewsPath) {
     require $viewsPath . '/home/index.php';
 });
 
-$router->add("/login", function () use ($viewsPath) {
-    require $viewsPath . '/auth/login.php';
+$router->add("/login", function () {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        (new AuthController())->login();
+    } else {
+        (new AuthController())->showLogin();
+    }
 });
 
-$router->add("/register", function () use ($viewsPath) {
-    require $viewsPath . '/auth/Register.php';
+$router->add("/register", function () {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        (new AuthController())->register();
+    } else {
+        (new AuthController())->showRegister();
+    }
 });
 
-$router->add("/dashboard", function () use ($viewsPath) {
-    require $viewsPath . '/Dashboard/dashboard.php';
+$router->add("/logout", function () {
+    (new AuthController())->logout();
 });
 
-$router->add("/incomes", function () use ($viewsPath) {
-    require $viewsPath . '/incomes/incomes.php';
+$router->add("/dashboard", function () {
+    (new DashboardController())->index();
 });
 
-$router->add("/incomes/add", function () use ($viewsPath) {
-    require $viewsPath . '/incomes/add.php';
+$router->add("/incomes", function () {
+    (new IncomeController())->index();
 });
 
-$router->add("/incomes/edit", function () use ($viewsPath) {
-    require $viewsPath . '/incomes/edit.php';
+$router->add("/incomes/add", function () {
+    (new IncomeController())->store();
 });
 
-$router->add("/incomes/delete", function () use ($viewsPath) {
-    require $viewsPath . '/incomes/delete.php';
+$router->add("/incomes/edit", function () {
+    (new IncomeController())->update();
 });
 
-$router->add("/expences", function () use ($viewsPath) {
-    require $viewsPath . '/expences/expences.php';
+$router->add("/incomes/delete", function () {
+    (new IncomeController())->delete();
 });
 
-$router->add("/expences/add", function () use ($viewsPath) {
-    require $viewsPath . '/expences/add.php';
+$router->add("/expences", function () {
+    (new ExpenseController())->index();
 });
 
-$router->add("/expences/edit", function () use ($viewsPath) {
-    require $viewsPath . '/expences/edit.php';
+$router->add("/expences/add", function () {
+    (new ExpenseController())->store();
 });
 
-$router->add("/expences/delete", function () use ($viewsPath) {
-    require $viewsPath . '/expences/delete.php';
+$router->add("/expences/edit", function () {
+    (new ExpenseController())->update();
 });
 
-$router->add("/logout", function () use ($viewsPath) {
-    require $viewsPath . '/auth/logout.php';
+$router->add("/expences/delete", function () {
+    (new ExpenseController())->delete();
 });
-
 
 $router->dispatch($uri);

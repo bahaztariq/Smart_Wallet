@@ -2,6 +2,7 @@
 session_start();
 require __DIR__ . '/../../../vendor/autoload.php';
 
+use App\Core\CSRF;
 use App\Repositories\IncomeRepository;
 
 if (!isset($_SESSION['user_id'])) {
@@ -145,6 +146,7 @@ if (isset($_GET['edit_id'])) {
                             </button>
                         </div>
                         <form action="/incomes/add" method="POST" class="space-y-4">
+                            <?php echo CSRF::field(); ?>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Amount (DH)</label>
                                 <div class="relative">
@@ -190,6 +192,7 @@ if (isset($_GET['edit_id'])) {
                                 </button>
                             </div>
                             <form action="/incomes/edit" method="POST" class="space-y-4">
+                                <?php echo CSRF::field(); ?>
                                 <input type="hidden" name="id" value="<?php echo $income_data->getId(); ?>">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Amount (DH)</label>

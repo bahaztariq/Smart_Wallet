@@ -2,6 +2,7 @@
 session_start();
 require __DIR__ . '/../../../vendor/autoload.php';
 
+use App\Core\CSRF;
 use App\Repositories\UserRepository;
 use App\Services\UserService;
 
@@ -120,6 +121,7 @@ if (isset($_POST['submit'])) {
                 <?php endif; ?>
 
                 <form action="/register" method="POST" class="space-y-2">
+                    <?php echo CSRF::field(); ?>
 
 
                     <!-- Names -->
